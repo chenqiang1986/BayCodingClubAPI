@@ -12,6 +12,13 @@ https://code.visualstudio.com/
 
 
 ### Python Setup
+Make sure running the command in Terminal gives you the python version.
+```
+python3 --version
+```
+
+If you observe something like "unknown command python3", please first install python on your computer.
+
 https://www.python.org/downloads/
 
 ### Dependency
