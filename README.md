@@ -5,7 +5,10 @@
 ### Github Desktop
 https://desktop.github.com/download/
 
-Clone this repository to your local computer using Github Desktop
+1. Create your own github repository. (Not clone this one!!!)
+3. Copy exact content of .gitignore and requirements.txt from this repository.
+3. Create file .gitignore and requirements.txt in your repository with same content.
+4. Push your change to your remote github repository. 
 
 ### IDE Setup (Optional)
 https://code.visualstudio.com/
