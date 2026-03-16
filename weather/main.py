@@ -23,9 +23,9 @@ def main():
     weather_api_key = os.getenv("WEATHER_API_KEY")
 
     location = input("Enter a location (e.g. city name or zip code): ")
-    day_count = input("Enter the number of days to forecast (1-14): ")
+    day_count = input("Enter the number of days to forecast (1-3): ")
 
-    response = requests.post("http://api.weatherapi.com/v1/forecast.json", data={"key": weather_api_key, "q": location, "days": day_count})
+    response = requests.get(f"http://api.weatherapi.com/v1/forecast.json?key={weather_api_key}&q={location}&days={day_count}")
 
     if response.status_code != 200:
         print("Error Fetching Weather with Error Code: ", response.status_code)
