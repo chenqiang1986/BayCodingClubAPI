@@ -1,5 +1,7 @@
 # We use this file to persist API keys.
 .env
+.vscode
+myvenv
 
 # Ignore Python bytecode files and cache directories
 __pycache__/
