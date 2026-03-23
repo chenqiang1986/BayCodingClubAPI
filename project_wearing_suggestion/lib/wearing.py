@@ -23,4 +23,3 @@ def enrich_with_suggestion(weather_data):
         results.append(weather_piece | {"suggestion" : response.text})
         
     return results
-        

@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask, render_template, request
-from address.lib import normalize_zip_code
-from wearing.lib import enrich_with_suggestion
-from weather.lib import get_weather_from_api
+from lib.address import normalize_zip_code
+from lib.wearing import enrich_with_suggestion
+from lib.weather import get_weather_from_api
 
 app = Flask(__name__)
 
