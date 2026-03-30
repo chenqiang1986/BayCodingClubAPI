@@ -1,9 +1,9 @@
 
-    //const imageUpload = document.getElementById('imageUpload');
+    const imageUpload = document.getElementById('imageUpload');
     const previewContainer = document.getElementById('previewContainer');
     
     // Listen for file selection
-    //imageUpload.addEventListener('change', handleFileSelect);
+    imageUpload.addEventListener('change', handleFileSelect);
 
     function handleFileSelect(event) {
         const files = event.target.files; // Get selected files

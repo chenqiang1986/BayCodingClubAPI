@@ -1,0 +1,16 @@
+.image_card {
+    display: flex;
+}
+
+.preview_img {
+    width: 200px;
+    height: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+textarea {
+    resize: none;
+}
