@@ -11,7 +11,7 @@ MODEL = "gemini-2.5-flash-lite"
 def data_url_to_google_types(data_url):
     _, media_type, encode_base, content = re.split("data:|;|,", data_url)
     return types.Part.from_bytes(
-        mime_type="image/jpeg",
+        mime_type=media_type,
         data=content,
     )
     
