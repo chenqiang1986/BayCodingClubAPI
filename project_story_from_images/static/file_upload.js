@@ -44,7 +44,7 @@ async function processImageFile(files) {
         img_elem = document.createElement("img")
 
         img_elem.src = data_url
-        img_elem.class = "preview_img"
+        img_elem.className = "preview_img"
         image_card.appendChild(img_elem)
 
         fetching_elem = document.createElement("p")
