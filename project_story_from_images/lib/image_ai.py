@@ -38,23 +38,28 @@ def image_summary(image_data_url):
     return results
 
 def make_story(image_url_with_desc):
-    contents = [
-        """
-        Based on the input images, and their descriptions, please make up a story.
-        Control the output within 100 words.
-        """
-    ]
-    i = 0
-    for it in image_url_with_desc:
-        i += 1
-        contents.append(data_url_to_google_types(it["data_url"]))
-        contents.append(f"The {i}-th image's description: " + it["description"])
-    
-    response = client.models.generate_content(
-        model = MODEL,
-        contents=contents,
-    )
-    
-    return {
-        "story": response.text
-    }
+    try:
+        contents = [
+            """
+            Based on the input images, and their descriptions, please make up a story.
+            Control the output within 100 words.
+            """
+        ]
+        i = 0
+        for it in image_url_with_desc:
+            i += 1
+            contents.append(data_url_to_google_types(it["data_url"]))
+            contents.append(f"The {i}-th image's description: " + it["description"])
+        
+        response = client.models.generate_content(
+            model = MODEL,
+            contents=contents,
+        )
+        
+        return {
+            "story": response.text
+        }
+    except Exception as e:
+        return {
+            "story": f"Exception occured: {e}"
+        }
