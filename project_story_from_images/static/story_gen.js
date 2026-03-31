@@ -3,6 +3,9 @@ const generate_story_button = document.getElementById("generateStory")
 
 generate_story_button.addEventListener('click', handleGenerateStory)
 
+// Extracts the data URL from img elements and descriptions from textarea elements
+// within image_card class elements, then calls the backend /generate_story endpoint
+// with the collected image data and descriptions, and displays the returned story
 async function handleGenerateStory() {
     image_cards = document.getElementsByClassName("image_card")
     image_urls_with_desc = []

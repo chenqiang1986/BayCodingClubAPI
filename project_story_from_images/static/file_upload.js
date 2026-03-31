@@ -5,6 +5,8 @@ const storyContainer = document.getElementById("storyContainer");
 // Listen for file selection
 imageUpload.addEventListener('change', handleFileSelect);
 
+// Handles file selection event from the imageUpload input element
+// Extracts selected files and passes them to processImageFile for processing
 function handleFileSelect(event) {
     const files = event.target.files; // Get selected files
     if (!files.length) return; // Exit if no files selected
@@ -12,6 +14,9 @@ function handleFileSelect(event) {
     processImageFile(files);
 }
 
+// Adapter to FileReader.
+// So that the caller can use await to get the data URL instead of using onload 
+// callback.
 function readFileAsync(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -26,6 +31,9 @@ function readFileAsync(file) {
     });
 }
 
+// Processes image files by reading them as data URLs, creating image_card div elements
+// with img previews, calling the /summary_image backend endpoint to generate descriptions,
+// and displaying editable textarea fields with the descriptions
 async function processImageFile(files) {
 
     data_urls = [];
