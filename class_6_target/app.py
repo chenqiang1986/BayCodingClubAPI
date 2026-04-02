@@ -63,6 +63,7 @@ example of input:
         "description": "She discovers a magical cabin"
     }
 ]
+
 """
 def make_story(image_url_with_desc):
     try:
