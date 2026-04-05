@@ -29,9 +29,8 @@ def summary_image():
     print("Process Image Summary")
     
     images= json.loads(request.data)
-    print(images)
-    
-    print(os.environ["GEMINI_API_KEY"])
+    print(images[0:100])
+
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     value = json.dumps(image_summary(client, images["url"]))
     print(value)
