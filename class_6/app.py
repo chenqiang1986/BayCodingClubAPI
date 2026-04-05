@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv() # load from .env by default in the current directory
     
 import json
-from flask import Flask, render_template, request
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -18,7 +18,5 @@ def hello():
     return "Hello, World!", 200
 
 
-app.run(
-    host="127.0.0.1",
-    port=5000,    
-)
+if __name__ == '__main__':
+    app.run(debug=True)

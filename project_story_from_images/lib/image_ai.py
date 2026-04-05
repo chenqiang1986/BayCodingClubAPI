@@ -2,7 +2,6 @@ from google import genai
 from google.genai import types
 import os, re
 
-client = genai.Client()
 
 MODEL = "gemini-3-flash-preview"
 MODEL = "gemini-3.1-flash-lite-preview"
@@ -15,7 +14,7 @@ def data_url_to_google_types(data_url):
         data=content,
     )
     
-def image_summary(image_data_url):
+def image_summary(client, image_data_url):
     results = {}
     
     try:
@@ -37,7 +36,7 @@ def image_summary(image_data_url):
         
     return results
 
-def make_story(image_url_with_desc):
+def make_story(client, image_url_with_desc):
     try:
         contents = [
             """

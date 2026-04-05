@@ -53,53 +53,43 @@ def data_url_to_google_types(data_url):
 
 """
 example of input:
-[
-    {
-        "data_url": "data:image/jpeg;base64,/9j/4AAQSkZJRg...", 
-        "description": "A girl walks into the forest"
-    }, 
-    {
-        "data_url": "data:image/jpeg;base64,/9j/4AAQSkZJRg...", 
-        "description": "She discovers a magical cabin"
-    }
-]
+{
+    "data_url": "data:image/jpeg;base64,jfkldsajkfdsajfdfdksjafda...."
+}
 
 """
-def make_story(image_url_with_desc):
+def make_summary(image_url_obj):
     try:
         contents = [
             """
-            Based on the input images, and their descriptions, please make up a story.
-            Control the output within 100 words.
-            """
+            Make a summary for the input image.
+            Please limit your response within 100 words.
+            """,
+            
+            data_url_to_google_types(image_url_obj["data_url"])
         ]
-        i = 0
-        for it in image_url_with_desc:
-            i += 1
-            contents.append(data_url_to_google_types(it["data_url"]))
-            contents.append(f"The {i}-th image's description: " + it["description"])
-        
+   
         response = client.models.generate_content(
             model = MODEL,
             contents=contents,
         )
         
         return {
-            "story": response.text
+            "summary": response.text
         }
     except Exception as e:
         return {
-            "story": f"Exception occured: {e}"
+            "error": f"Exception occured: {e}"
         }
         
 
-@app.route('/generate_story', methods=['POST'])
+@app.route('/generate_summary', methods=['POST'])
 def generate_story():
-    image_url_with_desc_list = json.loads(request.data)
-    print(image_url_with_desc_list)
-    value = json.dumps(make_story(image_url_with_desc_list))
+    image_url_obj = json.loads(request.data)
+    print(image_url_obj)
+    value = json.dumps(make_summary(image_url_obj))
     print(value)
-    return value
+    return value, 200
 
 if __name__ == '__main__':
     app.run(debug=True)

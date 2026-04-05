@@ -1,5 +1,6 @@
-import json
+import json, os
 from dotenv import load_dotenv
+from google import genai
 load_dotenv()
 
 from flask import Flask, render_template, request
@@ -7,6 +8,7 @@ from flask import Flask, render_template, request
 from lib.image_ai import image_summary, make_story
 
 app = Flask(__name__)
+
 
 # GET / - Home Page
 # Renders the front-end interface for the application
@@ -25,8 +27,13 @@ def index():
 @app.route('/summary_image', methods=['POST'])
 def summary_image():
     print("Process Image Summary")
-    images= json.loads(request.data) 
-    value = json.dumps(image_summary(images["url"]))
+    
+    images= json.loads(request.data)
+    print(images)
+    
+    print(os.environ["GEMINI_API_KEY"])
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    value = json.dumps(image_summary(client, images["url"]))
     print(value)
     return value
 
@@ -38,9 +45,12 @@ def summary_image():
 # Example Output: {"story": "Once upon a time, a curious girl decided to explore the mysterious forest. As she walked deeper into the woods, the sunlight filtered through the tall trees. Suddenly, she came upon a charming cabin hidden among the trees..."}
 @app.route('/generate_story', methods=['POST'])
 def generate_story():
+    print("Generate Story")
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    
     image_url_with_desc_list = json.loads(request.data)
     print(image_url_with_desc_list)
-    value = json.dumps(make_story(image_url_with_desc_list))
+    value = json.dumps(make_story(client, image_url_with_desc_list))
     print(value)
     return value
 
