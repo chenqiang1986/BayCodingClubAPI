@@ -47,7 +47,6 @@ def generate_story():
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     
     image_url_with_desc_list = json.loads(request.data)
-    print(image_url_with_desc_list)
     value = json.dumps(make_story(client, image_url_with_desc_list))
     print(value)
     return value

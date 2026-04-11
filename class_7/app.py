@@ -19,16 +19,20 @@ def index_entrance():
         <body>
             <h1>Hello World!</h1>
             <input id="clickButton" type="button" value="Click Me!">
+            <div id="display_area"> </div>
         </body>
         <script>
-            document.getElementById('clickButton').addEventListener('click', function() {
-                alert('Button was clicked!');
-            });
+            document.getElementById('clickButton').addEventListener(
+                'click', 
+                function() {
+                    new_elmt = document.createElement('div')
+                    new_elmt.innerHTML="You clicked me!"
+                    
+                    document.getElementById('display_area').appendChild(new_elmt)
+                }
+            );
         </script>
         </html>
     """, 200
     
-app.run(
-    host="127.0.0.1",
-    port=5000,
-)
+app.run(debug=True)
