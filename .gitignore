@@ -2,6 +2,7 @@
 .env
 .vscode
 myvenv
+.secret
 
 # Ignore Python bytecode files and cache directories
 __pycache__/
