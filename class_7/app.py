@@ -1,38 +1,27 @@
 import json
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 
 app = Flask(__name__)
 
 @app.route('/')
 def index_entrance():
-    return """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Flask App</title>
-        </head>
-        <body>
-            <h1>Hello World!</h1>
-            <input id="clickButton" type="button" value="Click Me!">
-            <div id="display_area"> </div>
-        </body>
-        <script>
-            document.getElementById('clickButton').addEventListener(
-                'click', 
-                function() {
-                    new_elmt = document.createElement('div')
-                    new_elmt.innerHTML="You clicked me!"
-                    
-                    document.getElementById('display_area').appendChild(new_elmt)
-                }
-            );
-        </script>
-        </html>
-    """, 200
+    return render_template("index.html"), 200
+
+@app.route('/my_backend', methods=['POST'])
+def my_backend():
+    my_input = json.loads(request.data)
+    
+    print(my_input)
+    
+    if isinstance(my_input["num1"], int) and isinstance(my_input["num2"], int):
+        return json.dumps({
+            "sum": my_input["num1"] + my_input["num2"]
+        })
+    else:
+        return json.dumps({
+            "error": "Input is not integer"
+        })
     
 app.run(debug=True)
